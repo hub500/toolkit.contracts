@@ -1,1 +1,0 @@
-/usr/local/amax.cdt/bin/amax-ld -L/usr/local/opt/openssl@1.1/lib CMakeFiles/xchain.owner.dir/src/xchain.owner.cpp.obj -o xchain.owner.wasm 
