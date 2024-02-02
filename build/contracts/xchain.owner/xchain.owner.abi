@@ -1,0 +1,207 @@
+{
+    "____comment": "This file was generated with amax-abigen. DO NOT EDIT ",
+    "version": "amax::abi/1.1",
+    "types": [],
+    "structs": [
+        {
+            "name": "approvebind",
+            "base": "",
+            "fields": [
+                {
+                    "name": "oracle_checker",
+                    "type": "name"
+                },
+                {
+                    "name": "xchain",
+                    "type": "name"
+                },
+                {
+                    "name": "xchain_txid",
+                    "type": "string"
+                }
+            ]
+        },
+        {
+            "name": "global_t",
+            "base": "",
+            "fields": [
+                {
+                    "name": "admin",
+                    "type": "name"
+                },
+                {
+                    "name": "oracle_makers",
+                    "type": "name[]"
+                },
+                {
+                    "name": "oracle_checkers",
+                    "type": "name[]"
+                },
+                {
+                    "name": "ram_bytes",
+                    "type": "uint64"
+                },
+                {
+                    "name": "stake_net_quantity",
+                    "type": "asset"
+                },
+                {
+                    "name": "stake_cpu_quantity",
+                    "type": "asset"
+                }
+            ]
+        },
+        {
+            "name": "init",
+            "base": "",
+            "fields": [
+                {
+                    "name": "admin",
+                    "type": "name"
+                },
+                {
+                    "name": "oracle_maker",
+                    "type": "name"
+                },
+                {
+                    "name": "oracle_checker",
+                    "type": "name"
+                },
+                {
+                    "name": "stake_net_quantity",
+                    "type": "asset"
+                },
+                {
+                    "name": "stake_cpu_quantity",
+                    "type": "asset"
+                }
+            ]
+        },
+        {
+            "name": "proposebind",
+            "base": "",
+            "fields": [
+                {
+                    "name": "oracle_maker",
+                    "type": "name"
+                },
+                {
+                    "name": "xchain_name",
+                    "type": "name"
+                },
+                {
+                    "name": "xchain_txid",
+                    "type": "string"
+                },
+                {
+                    "name": "xchain_pubkey",
+                    "type": "string"
+                },
+                {
+                    "name": "owner",
+                    "type": "name"
+                },
+                {
+                    "name": "creator",
+                    "type": "name"
+                },
+                {
+                    "name": "pubkey",
+                    "type": "public_key"
+                }
+            ]
+        },
+        {
+            "name": "setoracle",
+            "base": "",
+            "fields": [
+                {
+                    "name": "oracle",
+                    "type": "name"
+                },
+                {
+                    "name": "is_maker",
+                    "type": "bool"
+                },
+                {
+                    "name": "to_add",
+                    "type": "bool"
+                }
+            ]
+        },
+        {
+            "name": "xchain_account_t",
+            "base": "",
+            "fields": [
+                {
+                    "name": "account",
+                    "type": "name"
+                },
+                {
+                    "name": "xchain_pubkey",
+                    "type": "string"
+                },
+                {
+                    "name": "xchain_txid",
+                    "type": "string"
+                },
+                {
+                    "name": "amc_pubkey",
+                    "type": "public_key"
+                },
+                {
+                    "name": "amc_txid",
+                    "type": "checksum256"
+                },
+                {
+                    "name": "bind_status",
+                    "type": "name"
+                },
+                {
+                    "name": "created_at",
+                    "type": "time_point_sec"
+                }
+            ]
+        }
+    ],
+    "actions": [
+        {
+            "name": "approvebind",
+            "type": "approvebind",
+            "ricardian_contract": ""
+        },
+        {
+            "name": "init",
+            "type": "init",
+            "ricardian_contract": ""
+        },
+        {
+            "name": "proposebind",
+            "type": "proposebind",
+            "ricardian_contract": ""
+        },
+        {
+            "name": "setoracle",
+            "type": "setoracle",
+            "ricardian_contract": ""
+        }
+    ],
+    "tables": [
+        {
+            "name": "global",
+            "type": "global_t",
+            "index_type": "i64",
+            "key_names": [],
+            "key_types": []
+        },
+        {
+            "name": "xchainaccts",
+            "type": "xchain_account_t",
+            "index_type": "i64",
+            "key_names": [],
+            "key_types": []
+        }
+    ],
+    "ricardian_clauses": [],
+    "variants": []
+}

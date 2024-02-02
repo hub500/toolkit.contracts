@@ -1,0 +1,8 @@
+/Users/richardchen/work/wasm.contracts/toolkit.contracts/build/contracts/CMakeFiles/edit_cache.dir
+/Users/richardchen/work/wasm.contracts/toolkit.contracts/build/contracts/CMakeFiles/rebuild_cache.dir
+/Users/richardchen/work/wasm.contracts/toolkit.contracts/build/contracts/amax.split/CMakeFiles/amax.split.dir
+/Users/richardchen/work/wasm.contracts/toolkit.contracts/build/contracts/amax.split/CMakeFiles/edit_cache.dir
+/Users/richardchen/work/wasm.contracts/toolkit.contracts/build/contracts/amax.split/CMakeFiles/rebuild_cache.dir
+/Users/richardchen/work/wasm.contracts/toolkit.contracts/build/contracts/xchain.owner/CMakeFiles/xchain.owner.dir
+/Users/richardchen/work/wasm.contracts/toolkit.contracts/build/contracts/xchain.owner/CMakeFiles/edit_cache.dir
+/Users/richardchen/work/wasm.contracts/toolkit.contracts/build/contracts/xchain.owner/CMakeFiles/rebuild_cache.dir

@@ -1,0 +1,46 @@
+{
+	"sources" : 
+	[
+		{
+			"file" : "/Users/richardchen/work/wasm.contracts/toolkit.contracts/build/CMakeFiles/src_tools_contracts_project"
+		},
+		{
+			"file" : "/Users/richardchen/work/wasm.contracts/toolkit.contracts/build/CMakeFiles/src_tools_contracts_project.rule"
+		},
+		{
+			"file" : "/Users/richardchen/work/wasm.contracts/toolkit.contracts/build/CMakeFiles/src_tools_contracts_project-complete.rule"
+		},
+		{
+			"file" : "/Users/richardchen/work/wasm.contracts/toolkit.contracts/build/src_tools_contracts_project-prefix/src/src_tools_contracts_project-stamp/src_tools_contracts_project-build.rule"
+		},
+		{
+			"file" : "/Users/richardchen/work/wasm.contracts/toolkit.contracts/build/src_tools_contracts_project-prefix/src/src_tools_contracts_project-stamp/src_tools_contracts_project-configure.rule"
+		},
+		{
+			"file" : "/Users/richardchen/work/wasm.contracts/toolkit.contracts/build/src_tools_contracts_project-prefix/src/src_tools_contracts_project-stamp/src_tools_contracts_project-download.rule"
+		},
+		{
+			"file" : "/Users/richardchen/work/wasm.contracts/toolkit.contracts/build/src_tools_contracts_project-prefix/src/src_tools_contracts_project-stamp/src_tools_contracts_project-install.rule"
+		},
+		{
+			"file" : "/Users/richardchen/work/wasm.contracts/toolkit.contracts/build/src_tools_contracts_project-prefix/src/src_tools_contracts_project-stamp/src_tools_contracts_project-mkdir.rule"
+		},
+		{
+			"file" : "/Users/richardchen/work/wasm.contracts/toolkit.contracts/build/src_tools_contracts_project-prefix/src/src_tools_contracts_project-stamp/src_tools_contracts_project-patch.rule"
+		},
+		{
+			"file" : "/Users/richardchen/work/wasm.contracts/toolkit.contracts/build/src_tools_contracts_project-prefix/src/src_tools_contracts_project-stamp/src_tools_contracts_project-test.rule"
+		},
+		{
+			"file" : "/Users/richardchen/work/wasm.contracts/toolkit.contracts/build/src_tools_contracts_project-prefix/src/src_tools_contracts_project-stamp/src_tools_contracts_project-update.rule"
+		}
+	],
+	"target" : 
+	{
+		"labels" : 
+		[
+			"src_tools_contracts_project"
+		],
+		"name" : "src_tools_contracts_project"
+	}
+}
