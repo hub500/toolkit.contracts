@@ -4,14 +4,25 @@ project(src_tools)
 
 set(VERSION_MAJOR 0)
 set(VERSION_MINOR 1)
-set(VERSION_PATCH 1)
-# set(VERSION_SUFFIX alpha)
+set(VERSION_PATCH 0)
+# set(VERSION_SUFFIX develop2)
+
+
+set(VERSION_FULL "${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH}")
 
 if (VERSION_SUFFIX)
-   set(VERSION_FULL "${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH}-${VERSION_SUFFIX}")
-else()
-   set(VERSION_FULL "${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH}")
+   set(VERSION_FULL "${VERSION_FULL}-${VERSION_SUFFIX}")
 endif()
+
+add_custom_target(
+   evaluate_every_build ALL
+   COMMAND ${CMAKE_COMMAND} -DVERSION_FULL=${VERSION_FULL}
+                              -DSRC_DIR=${CMAKE_SOURCE_DIR}/version
+                              -DDEST_DIR=${CMAKE_BINARY_DIR}/version
+                              -P ${CMAKE_SOURCE_DIR}/version/VersionUtils.cmake
+   # BYPRODUCTS ${CMAKE_CURRENT_BINARY_DIR}/src/version_impl.cpp
+   COMMENT "Updating version metadata..." VERBATIM )
+set(CONTRACT_VERSION_FILE ${CMAKE_BINARY_DIR}/version/ContractVersion.cmake)
 
 include(ExternalProject)
 
@@ -19,8 +30,8 @@ find_package(amax.cdt)
 
 message(STATUS "Building ${CMAKE_PROJECT_NAME} v${VERSION_FULL}")
 
-set(AMAX_CDT_VERSION_MIN "1.7.0")
-set(AMAX_CDT_VERSION_SOFT_MAX "1.7.99")
+set(AMAX_CDT_VERSION_MIN "1.7")
+set(AMAX_CDT_VERSION_SOFT_MAX "1.9")
 #set(AMAX_CDT_VERSION_HARD_MAX "")
 
 ### Check the version of amax.cdt
@@ -46,10 +57,12 @@ else()
 endif()
 
 ExternalProject_Add(
-   src_tools_contracts_project
-   SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/contracts
-   BINARY_DIR ${CMAKE_CURRENT_BINARY_DIR}/contracts
+   contracts_project
+   SOURCE_DIR ${CMAKE_SOURCE_DIR}/contracts
+   BINARY_DIR ${CMAKE_BINARY_DIR}/contracts
    CMAKE_ARGS -DCMAKE_TOOLCHAIN_FILE=${AMAX_CDT_ROOT}/lib/cmake/amax.cdt/AmaxWasmToolchain.cmake
+              -DCONTRACT_VERSION_FILE=${CONTRACT_VERSION_FILE}
+   DEPENDS evaluate_every_build
    UPDATE_COMMAND ""
    PATCH_COMMAND ""
    TEST_COMMAND ""
@@ -83,8 +96,8 @@ if(BUILD_TESTS)
      contracts_unit_tests
      LIST_SEPARATOR | # Use the alternate list separator
      CMAKE_ARGS -DCMAKE_BUILD_TYPE=${TEST_BUILD_TYPE} -DCMAKE_PREFIX_PATH=${TEST_PREFIX_PATH} -DCMAKE_FRAMEWORK_PATH=${TEST_FRAMEWORK_PATH} -DCMAKE_MODULE_PATH=${TEST_MODULE_PATH} -DAMAX_ROOT=${AMAX_ROOT} -DLLVM_DIR=${LLVM_DIR} -DBOOST_ROOT=${BOOST_ROOT}
-     SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/tests
-     BINARY_DIR ${CMAKE_CURRENT_BINARY_DIR}/tests
+     SOURCE_DIR ${CMAKE_SOURCE_DIR}/tests
+     BINARY_DIR ${CMAKE_BINARY_DIR}/tests
      BUILD_ALWAYS 1
      TEST_COMMAND   ""
      INSTALL_COMMAND ""
@@ -92,6 +105,3 @@ if(BUILD_TESTS)
 else()
    message(STATUS "Unit tests will not be built. To build unit tests, set BUILD_TESTS to true.")
 endif()
-
-configure_file(${CMAKE_CURRENT_SOURCE_DIR}/scripts/generate_package.sh.in ${CMAKE_CURRENT_BINARY_DIR}/packages/generate_package.sh @ONLY)
-configure_file(${CMAKE_CURRENT_SOURCE_DIR}/scripts/generate_tarball.sh ${CMAKE_CURRENT_BINARY_DIR}/packages/generate_tarball.sh COPYONLY)
