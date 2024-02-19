@@ -71,7 +71,6 @@ std::vector<char> num_to_var_int(const uint64_t x) {
 }
 
 eosio::checksum256 sha256sha256(const vector<char> data) {
-
     auto sha_1 = sha256(data.data(),data.size());
     auto byte_array = sha_1.extract_as_byte_array();
     auto chars = reinterpret_cast<const char*>(byte_array.data());
@@ -87,7 +86,7 @@ void proxy::init(const name& admin,const name& submitter) {
 
 }
 
-void proxy::activate( const name& account, 
+void proxy::activate(const name& account, 
                     const string& btc_pub_key,
                     const eosio::signature& signature,
                     const public_key temp_amc_pub) {
