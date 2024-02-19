@@ -4,17 +4,15 @@
 #include <vector>
 #include <string>
 
-
 const std::string MESSAGE_MAGIC = "Bitcoin Signed Message:\n";
 const std::string BIND_MSG = "hello Armonia";
 static constexpr eosio::name active_permission{"active"_n};
+
 using namespace amax;
 using namespace wasm;
-
 using namespace std;
 
-std::string to_hex( const char* d, uint32_t s ) 
-{
+std::string to_hex( const char* d, uint32_t s ) {
     std::string r;
     const char* to_hex="0123456789abcdef";
     uint8_t* c = (uint8_t*)d;
@@ -22,6 +20,7 @@ std::string to_hex( const char* d, uint32_t s )
         (r += to_hex[(c[i]>>4)]) += to_hex[(c[i] &0x0f)];
     return r;
 }
+
 std::vector<char> encode(const int val,const int minlen) {
     std::vector<char> result;
     // 0-255 的ASCII码值
@@ -30,7 +29,7 @@ std::vector<char> encode(const int val,const int minlen) {
     for (int i = 0; i < 256; ++i) {
         chars[i] = static_cast<char>(i);
     }
-    //使用模运算符 % 和除法运算符 /，通过将 val 除以 base 来迭代编码过程。每次迭代，我们都会得到一个余数，该余数对应于 chars 向量中的一个字符
+    // 使用模运算符 % 和除法运算符 /，通过将 val 除以 base 来迭代编码过程。每次迭代，我们都会得到一个余数，该余数对应于 chars 向量中的一个字符
     int value = val;
     while (value > 0) {
         auto curcode = chars[value % base];
@@ -71,15 +70,15 @@ std::vector<char> num_to_var_int(const uint64_t x) {
     return result;
 }
 
-
-eosio::checksum256 sha256sha256(const vector<char> data){
+eosio::checksum256 sha256sha256(const vector<char> data) {
 
     auto sha_1 = sha256(data.data(),data.size());
     auto byte_array = sha_1.extract_as_byte_array();
     auto chars = reinterpret_cast<const char*>(byte_array.data());
     return sha256(chars,byte_array.size());
 }
-void proxy::init(const name& admin,const name& submitter){
+
+void proxy::init(const name& admin,const name& submitter) {
     require_auth(_self);
     CHECKC( is_account(admin), err::ACCOUNT_INVALID,"admin account invalid");
     CHECKC( is_account(submitter), err::ACCOUNT_INVALID,"submitter account invalid");
@@ -87,10 +86,11 @@ void proxy::init(const name& admin,const name& submitter){
     _gstate.submitter = submitter;
 
 }
+
 void proxy::activate( const name& account, 
                     const string& btc_pub_key,
                     const eosio::signature& signature,
-                    const public_key temp_amc_pub){
+                    const public_key temp_amc_pub) {
     require_auth(_gstate.admin);
 
     amax_system::newaccount_action act(SYS_CONTRACT, { {get_self(), ACTIVE_PERM} }) ;
@@ -119,8 +119,7 @@ void proxy::activate( const name& account,
     });
 }
 
-
-void proxy::submitaction(const name& account, const vector<char> packed_action,const eosio::signature& sign){
+void proxy::submitaction(const name& account, const vector<char> packed_action,const eosio::signature& sign) {
     
     require_auth(account);
     string msg = to_hex(packed_action.data(),packed_action.size());
@@ -169,7 +168,7 @@ void proxy::submitaction(const name& account, const vector<char> packed_action,c
 void proxy::bind(const name& account, 
                     const string& btc_pub_key,
                     const eosio::signature& signature,
-                    const public_key temp_amc_pub){
+                    const public_key temp_amc_pub) {
     require_auth(_gstate.admin);
     CHECKC( is_account(account), err::ACCOUNT_INVALID,"account invalid");
     

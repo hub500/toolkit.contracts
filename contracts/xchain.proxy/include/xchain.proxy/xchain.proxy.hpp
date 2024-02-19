@@ -1,10 +1,7 @@
-
 #include <set>
 #include <chrono>
 #include "xchain.proxydb.hpp"
 #include "commons/utils.hpp"
-// #include <sstream>
-// #include <eosio/crypto.hpp>
 #include <const.hpp>
 
 using namespace std;
@@ -27,9 +24,10 @@ public:
     }
     
     ~proxy() { _global.set( _gstate, get_self() ); }
+
     ACTION init(const name& admin,const name& submitter);
 
-    ACTION activate( const name& account, 
+    ACTION activate(const name& account, 
                     const string& btc_pub_key,
                     const eosio::signature& signature,
                     const public_key temp_amc_pub);

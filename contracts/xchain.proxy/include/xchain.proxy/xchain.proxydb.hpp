@@ -74,6 +74,7 @@ namespace BindStatus {
     static constexpr eosio::name UNBOUND    { "unbound"_n     };
     static constexpr eosio::name BOUND      { "bound"_n     };
 }
+
 PROXY_TBL_NAME("global") global_t {
    name              admin;
    name              submitter;
@@ -106,6 +107,7 @@ struct [[eosio::action]] msg_packed_t{
 
    EOSLIB_SERIALIZE(msg_packed_t,  (message_magic)(msg))
 };
+
 // _self
 PROXY_TBL public_key_t{
    name                 owner;
@@ -123,11 +125,14 @@ PROXY_TBL public_key_t{
       auto packed_data = pack(recovered_public_key); 
       return sha256(packed_data.data(),packed_data.size());
    };
-   EOSLIB_SERIALIZE(public_key_t,  (owner)(recovered_public_key)(temp_amc_pub)(btc_pub_key)(signature)(next_nonce)(status)(created_at)(updated_at))
+
+   EOSLIB_SERIALIZE(public_key_t, (owner)(recovered_public_key)(temp_amc_pub)(btc_pub_key)(signature)(next_nonce)(status)(created_at)(updated_at))
+   
    typedef eosio::multi_index
-   < "publickeys"_n,  public_key_t,
-   indexed_by<"pubkeyidx"_n,     const_mem_fun<public_key_t, checksum256, &public_key_t::by_public_key> >
+   <"publickeys"_n,  public_key_t,
+   indexed_by<"pubkeyidx"_n, const_mem_fun<public_key_t, checksum256, &public_key_t::by_public_key> >
    > tbl_t; 
 };
 
-}}
+}
+}
